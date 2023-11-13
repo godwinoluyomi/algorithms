@@ -1,13 +1,27 @@
 ALGORITHM sentence_count
+
+/* 
+    Check each character in the sentence that is not point (Used point to exit the loop)
+    For each of those character also count an index to identify the character
+    Select each character to determine if it is a space " "
+    Generally, for every space there must be space + 1 words (For 2 spaces there is 3 words)
+    Therefore words = space + 1
+    Check if character is a vowel by comparing with a or e or i or o or u
+
+    */
+    
 VAR
     sentence: STRING;
     sentenceIndex: INTEGER := 0;
     character: STRING;
     countChar : INTEGER := 0;
+    countSpace : INTEGER := 0;
     countWord : INTEGER := 0;
     countVowel : INTEGER := 0;
     
 BEGIN
+
+    // Get input of sentence
     Read(sentence)
 
     WHILE (sentence NOT '.') DO
@@ -16,15 +30,23 @@ BEGIN
 
         character = sentence[sentenceIndex];
 
-        IF (character NOT " " ) THEN
-            countWord = countWord + 1;
+        // Check if character is a space then count the spaces with the loop
+        IF (character = " ") THEN
+            countSpace = countSpace + 1;
         END_IF
 
+        // Check if character is a vowel then count
         IF (character = 'a' or character = 'e' or character = 'i' or character = 'o' or character = 'u') THEN
             countVowel = countVowel + 1;
         END_IF
 
     END_WHILE
+
+    // Add one to the space to get the number of words
+    countWord = countSpace + 1;
+
+    // Add the point to the number of characters 
+    countChar = countChar + 1;
 
     Write(countChar)
     Write(countWord)
