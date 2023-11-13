@@ -1,0 +1,33 @@
+ALGORITHM sentence_count
+VAR
+    sentence: STRING;
+    sentenceIndex: INTEGER := 0;
+    character: STRING;
+    countChar : INTEGER := 0;
+    countWord : INTEGER := 0;
+    countVowel : INTEGER := 0;
+    
+BEGIN
+    Read(sentence)
+
+    WHILE (sentence NOT '.') DO
+        countChar := countChar + 1;
+        sentenceIndex := sentenceIndex + 1;
+
+        character = sentence[sentenceIndex];
+
+        IF (character NOT " " ) THEN
+            countWord = countWord + 1;
+        END_IF
+
+        IF (character = 'a' or character = 'e' or character = 'i' or character = 'o' or character = 'u') THEN
+            countVowel = countVowel + 1;
+        END_IF
+
+    END_WHILE
+
+    Write(countChar)
+    Write(countWord)
+    Write(countVowel)
+    
+END
