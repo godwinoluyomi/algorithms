@@ -1,0 +1,82 @@
+/*
+Step 1: Function to create an array from user input return the array.
+Step 2: Function to check distinct of each of the array1 and array2.
+Step 3: Sum the array distinct elements of array1 and array2.
+*/
+
+// STEP 1
+FUNCTION array_elements(n): ARRAY_OF INTEGER[n]           // function name
+VAR
+    //declare local variables for the function
+    i : INTEGER :=0;
+    arrayblock : ARRAY_OF INTEGER[n];                               
+BEGIN
+    //receive array elements from user using for loop
+    FOR i FROM 0 TO n-1 STEP 1  DO
+        Read(arrayblock[i]);          
+        i = i + 1;
+    END_FOR
+    RETURN arrayblock; // return array    
+END
+
+
+// STEP 2: Function to check distinct of each of the array1 and array2.
+FUNCTION check_sum_distinct(y, z, array_1, array_2) : INTEGER           // function name, parameter and return type
+VAR
+    // declare local variables to ne used in the function.
+    y, z, sum, i, j := INTEGER;
+    array_1 : ARRAY_OF INTEGER [y];
+    array_2 : ARRAY_OF INTEGER [z];
+BEGIN
+    // nested loop to compare each element in array 1 to array 2
+    FOR i FROM 0 TO y-1 STEP 1  DO                                         
+        FOR j FROM 0 TO z-1 STEP 1  DO                                     
+            IF (array_1[i] == array_2[j]) THEN            //if same item found in both arrays, break out of loop                  
+                BREAK; 
+            END_IF
+        END_FOR
+        IF (array_1[i] <> array_2[j]) THEN                 // if items not similar, add element to sum of distinct items from array 1
+            sum := sum + array_1[i];
+        END_IF
+    END_FOR
+    RETURN sum ;                                            // Return sum of disticnt
+END
+
+
+// STEP 3: Sum the array distinct elements of array1 and array2.
+ALGORITHM sum_of_distinct
+VAR
+    array1 : ARRAY_OF INTEGER[20];
+    array2 : ARRAY_OF INTEGER[20];
+    distinct, distinct1, distinct2, n, a, b = INTEGER :=0;
+
+BEGIN
+    // prompt user to enter size of array between 1 and 20
+    // if number enter is not between and 20, then continue to prompt user again
+    REPEAT
+        write ("Enter size of first array between 1 and 20: ");
+        Read (a);
+    UNTIL (a > 0 AND a <= 20)
+
+    // call the function to get elements of the first array and set it to a variable
+    array1 := array_elements(a);                                        
+
+     // prompt user to enter size of array between 1 and 20
+    // if number enter is not between and 20, then continue to prompt user again
+    
+    REPEAT
+        write ("Enter size of second array:");
+        Read (b);
+    UNTIL (b > 0 AND b <= 20)
+    
+    // call the function to get elements of the first array and set it to a variable
+    array2 := array_elements(b);
+
+    // call the function to check for 
+    distinct1 := check_sum_distinct(a, b, array1, array2);
+    distinct2 := check_sum_distinct(b, a, array2, array1);
+    distinct := distinct1 + distinct2;
+
+    write(distinct);
+
+END
